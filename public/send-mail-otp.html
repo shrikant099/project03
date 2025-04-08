@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password</title>
+  <link rel="stylesheet" href="./css/verify-otp.css" />
+</head>
+<body>
+
+  <!-- 🧾 Message Box -->
+  <p id="msgbox"></p>
+
+  <!-- 🔄 Loading Spinner -->
+  <div id="loader-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- 🔐 Forgot Password Container -->
+  <div class="container">
+    <h2>Forgot Password</h2>
+    <form id="forgotForm">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <button type="submit">Send OTP</button>
+      <div class="message" id="message"></div>
+    </form>
+
+    <div class="otp-input" id="otpSection">
+      <input type="text" maxlength="1" />
+      <input type="text" maxlength="1" />
+      <input type="text" maxlength="1" />
+      <input type="text" maxlength="1" />
+    </div>
+
+    <button id="verifyBtn">Verify OTP</button>
+  </div>
+
+  <script src="./js/send-otp.api.js"></script>
+</body>
+</html>
