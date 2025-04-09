@@ -84,12 +84,13 @@ document.querySelector("#signInForm").addEventListener("submit", async(e) => {
 
     try {
 
-        const login = await fetch(`http://localhost:7000/api/auth/login` , {
+        const login = await fetch(`/api/auth/login` , {
             method: "POST",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json"
             },
+            credentials: true,
             body: JSON.stringify({email , password})
         });
 
