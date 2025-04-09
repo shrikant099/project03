@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             method: "GET",
             headers: {
                 Accept: "application/json"
-            }
+            },
+            credentials: "include"
         });
 
         const parseUser = await users.json();
