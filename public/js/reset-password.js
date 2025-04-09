@@ -65,7 +65,9 @@ resetForm.addEventListener("submit", async (e) => {
         };
 
         handleMsgBox(data.message || "Reset password succesfull", "#4caf50")
-
+        setTimeout(() => {
+            window.location.href = "../index.html"
+        },500)
 
     } catch (error) {
         toggleLoadingSpinner(false); // Hide loader on error too
