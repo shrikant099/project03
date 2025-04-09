@@ -90,8 +90,8 @@ document.querySelector("#signInForm").addEventListener("submit", async(e) => {
                 Accept: "application/json",
                 "Content-Type": "application/json"
             },
-            credentials: true,
-            body: JSON.stringify({email , password})
+            body: JSON.stringify({email , password}),
+            credentials: 'include',
         });
 
         const loginData = await login.json();
