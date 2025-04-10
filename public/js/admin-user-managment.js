@@ -1,9 +1,19 @@
+function toggleLoadingSpinner(show = true) {
+    const loader = document.getElementById("loader-overlay");
+    loader.style.display = show ? "flex" : "none";
+};
 document.addEventListener("DOMContentLoaded", async () => {
+    // Loading spinner handler function
+
     let currentPage = 1;
     const limit = 10;
 
+
     const fetchAndRenderUsers = async (page = 1) => {
         try {
+
+            toggleLoadingSpinner(true);
+
             const res = await fetch(`/api/admin/paginateUsers?page=${page}`, {
                 method: "GET",
                 headers: {
@@ -15,6 +25,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!res.ok) throw new Error(`HTTP error! ${res.status}`);
 
             const data = await res.json();
+
+            toggleLoadingSpinner(false);
 
             const tableBody = document.querySelector("#userTableBody");
             tableBody.innerHTML = "";
@@ -42,6 +54,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             renderPagination(data.totalPages, data.currentPage);
         } catch (err) {
             console.error("Error loading users:", err);
+        } finally {
+            toggleLoadingSpinner(false);
         }
     };
 
@@ -105,6 +119,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             try {
+                toggleLoadingSpinner(true);
+
                 const deleteUser = await fetch(`/api/admin/users/${id}`, {
                     method: "DELETE",
                     headers: {
@@ -126,6 +142,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             } catch (error) {
                 console.log(`Error Deleting User: ${error}`);
+            } finally {
+                toggleLoadingSpinner(false);
             }
         }
     });

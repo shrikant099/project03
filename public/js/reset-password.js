@@ -25,12 +25,12 @@ resetForm.addEventListener("submit", async (e) => {
         return;
     };
 
-    if (!newPassword.value || !confirmPassword.value) {
+    if (!password.value || !confirmPassword.value) {
         handleMsgBox("Please enter both fields!", "#ff4d4d");
         return;
     }
 
-    if (newPassword.value !== confirmPassword.value) {
+    if (password.value !== confirmPassword.value) {
         handleMsgBox("Password and Confirm Password do not match", "#ff4d4d");
         return;
     }
