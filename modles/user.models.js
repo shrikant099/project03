@@ -9,6 +9,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    number: {
+        type: Number,
+        required: true
+    },
     password: {
         type: String,
         required: true,
@@ -17,6 +21,7 @@ const userSchema = mongoose.Schema({
         type: String
     },
     photo: String,
+
     role: {
         type: String,
         enum: ["Admin", "User"],

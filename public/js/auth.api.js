@@ -1,6 +1,5 @@
 
 const signUp = document.getElementById("signUpForm");
-
 const msgFunction = (bgc, text) => {
     const msg = document.querySelector("#msgBox");
     msg.style.backgroundColor = bgc;
@@ -21,9 +20,10 @@ signUp.addEventListener("submit", async (e) => {
     const inputName = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
+    const number = document.getElementById("number").value;
 
 
-    if (!inputName || !email || !password) {
+    if (!inputName || !email || !password || !number) {
         msgFunction("red", "Fields are required!");
         return;
     };
@@ -36,6 +36,7 @@ signUp.addEventListener("submit", async (e) => {
     const formData = {
         username: inputName,
         email: email,
+        number: number,
         password: password
     };
     try {
@@ -61,7 +62,6 @@ signUp.addEventListener("submit", async (e) => {
     } catch (error) {
         console.log(`Error Register ${error}`);
         msgFunction("red", "Something went wrong !");
-
         return;
     }
 });

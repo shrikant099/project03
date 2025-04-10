@@ -187,10 +187,51 @@ const getUserWithId = async (req , res) => {
     };
 };
 
+// PaginateUsers pagination 
+const paginateGetUsers = async (req , res) => {
+
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = 6;
+        
+        // Skip users Logic
+        const skip = ( page - 1) * limit;
+
+        // Total users count ( for total pages );
+        const totalUsers = await User.countDocuments();
+
+        // Fetch users 
+        const fetchUsers = await User.find().skip(skip).limit(limit);
+
+        if(!fetchUsers || fetchUsers.length === 0){
+            return res.status(404).json({ success: false ,message: "User Not Fond"})
+        };
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: "Users fetched successfully",
+                currentPage: page,
+                totalPages: Math.ceil( totalUsers / limit),
+                totalUsers: totalUsers,
+                limit: limit,
+                usersPerPage: fetchUsers.length,
+                users: fetchUsers
+            }
+        );
+
+
+    } catch (error) {   
+         console.log(`Error getting users with pagination: ${error}`);
+        return res.status(500).json({success: false, message: error.message})
+    };
+};
+
 
 export {
     getUsers,
     updateUser,
     deleteUser,
-    getUserWithId
+    getUserWithId,
+    paginateGetUsers
 }

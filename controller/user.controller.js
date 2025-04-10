@@ -13,9 +13,9 @@ async function genrateOtp() {
 
 const registerUser = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email , number, password } = req.body;
 
-        if (!username || !email || !password) {
+        if (!username || !email || !number || !password) {
             return res.status(402).json(
                 {
                     success: false,
@@ -41,6 +41,7 @@ const registerUser = async (req, res) => {
         const user = await User.create({
             username,
             email,
+            number,
             password: hashedPassword
         });
 
@@ -190,17 +191,15 @@ async function sendMailForgetPass(req, res) {
         // Nodemailer se OTP bhejna
         const transporter = nodemailer.createTransport({
             service: 'gmail',
-            host: 'smtp.gmail.com',
             port: 465,
-            secure: true,
             auth: {
-                user: 'shrikantsoni098@gmail.com',  // Aapka email
-                pass: 'dgwp sawd ttza kmko'  // Aapka email password
+                user: 'ys162393@gmail.com',  // Aapka email
+                pass: 'trch joyh isfg gnmr'  // Aapka email password
             }
         });
 
         const mailOptions = {
-            from: 'shrikantsoni809@gmail.com',
+            from: 'ys162393@gmail.com',
             to: email,
             subject: `🔐 Your OTP Code - Action Required`,
             text: `Your OTP is: ${otp}`,
@@ -234,7 +233,7 @@ async function sendMailForgetPass(req, res) {
         };
 
         // OTP ko email se bhejna
-        transporter.sendMail(mailOptions, (error, info) => {
+      await transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.log("Send Mail Error:", error);
                 return res.status(500).json({
